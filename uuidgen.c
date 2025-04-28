@@ -1,5 +1,6 @@
 #include <err.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <uuid.h>
 
@@ -25,5 +26,5 @@ main(int argc, char *argv[])
 		err(1, "uuid_to_string");
 
 	(void)printf("%s\n", str);
-	return 0;
+	return EXIT_SUCCCESS;
 }
