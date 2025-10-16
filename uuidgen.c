@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <uuid.h>
 
+#define FREE(p) { free(p); p = NULL; }
+
 int
 main(int argc, char *argv[])
 {
@@ -11,7 +13,7 @@ main(int argc, char *argv[])
 	uint32_t status;
 	char *str = NULL;
 
-	if (pledge(NULL, NULL) == -1)
+	if (pledge("stdio", NULL) == -1)
 		err(1, "pledge");
 
 	if (unveil(NULL, NULL) == -1)
@@ -26,5 +28,6 @@ main(int argc, char *argv[])
 		err(1, "uuid_to_string");
 
 	(void)printf("%s\n", str);
-	return EXIT_SUCCCESS;
+	FREE(str);
+	return EXIT_SUCCESS;
 }
